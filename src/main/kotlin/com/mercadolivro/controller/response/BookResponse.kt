@@ -2,7 +2,6 @@ package com.mercadolivro.controller.response
 
 import com.mercadolivro.enums.BookStatus
 import com.mercadolivro.model.CustomerModel
-import jakarta.persistence.*
 import java.math.BigDecimal
 
 data class BookResponse(

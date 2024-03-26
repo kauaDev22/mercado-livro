@@ -3,7 +3,10 @@ package com.mercadolivro.service
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.model.enums.CustomerStatus
 import com.mercadolivro.repository.CustomerRepository
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
 
 @Service
 class CustomerService(
@@ -11,12 +14,17 @@ class CustomerService(
     val bookService : BookService
 ) {
 
-    fun getAll(name: String?): List<CustomerModel> {
-        name?.let {
-            return customerRepository.findByNameContaining(it)
+    fun getAll(name: String?, pageable: Pageable): Page<CustomerModel> {
+        return if (name != null) {
+            customerRepository.findByNameContaining(name, pageable)
+        } else {
+            val customers = customerRepository.findAll()
+            val pageCustomers = PageImpl<CustomerModel>(customers.toList(), pageable, customers.count().toLong())
+            pageCustomers
         }
-        return customerRepository.findAll().toList()
     }
+
+
 
     fun create(customer: CustomerModel) {
         customerRepository.save(customer)
