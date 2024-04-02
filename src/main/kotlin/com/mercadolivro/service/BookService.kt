@@ -22,7 +22,7 @@ class BookService(val bookRepository: BookRepository) {
     fun findActive(pageable: Pageable): Page<BookModel> = bookRepository.findByStatus(BookStatus.ATIVO, pageable)
 
     fun findById(id: Int): BookModel {
-        return bookRepository.findById(id).orElseThrow()
+        return bookRepository.findById(id).orElseThrow{Exception("Não existe esse recurso")}
     }
 
     fun delete(id: Int){
