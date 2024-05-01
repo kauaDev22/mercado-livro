@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page
 
 interface CustomerRepository: CrudRepository<CustomerModel, Int> {
     fun findByNameContaining(name: String, pageable: Pageable): Page<CustomerModel>
+    fun existsByEmail(email: String): Boolean
+
+
 
 
 }
