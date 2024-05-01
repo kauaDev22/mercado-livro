@@ -27,6 +27,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation ("org.springframework.boot:spring-boot-starter-hateoas")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("mysql:mysql-connector-java:8.0.30")
 	implementation("org.flywaydb:flyway-core")

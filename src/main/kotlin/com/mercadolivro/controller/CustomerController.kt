@@ -7,6 +7,7 @@ import com.mercadolivro.controller.response.CustomerResponse
 import com.mercadolivro.extesion.toResponse
 import com.mercadolivro.extesion.toCustomerModel
 import com.mercadolivro.service.CustomerService
+import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -27,7 +28,7 @@ class CustomerController(val customerService: CustomerService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-        fun create(@RequestBody customer: PostCustomerRequest)  {
+        fun create(@RequestBody @Valid customer: PostCustomerRequest)  {
                 customerService.create(customer.toCustomerModel())
     }
 
@@ -38,7 +39,7 @@ class CustomerController(val customerService: CustomerService) {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun update(@PathVariable id: Int,@RequestBody customer: PutCustomerRequest)     {
+    fun update(@PathVariable id: Int,@RequestBody @Valid customer: PutCustomerRequest)     {
        val customerSaved =  customerService.findById(id)
         customerService.update(customer.toCustomerModel(customerSaved))
     }
